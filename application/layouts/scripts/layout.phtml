@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <?php echo $this->headTitle(); ?>
         <?php echo $this->headMeta(); ?>
@@ -8,28 +8,49 @@
     </head>
     <body>
         
+        <div class="container">
 
-        <ul class="breadcrumb">Planner</ul>
-
-        
-        <?php //echo $this->flashMessages(); ?>
-        
-        
-        <div class="container-fluid">
-              
-            <div class="row-fluid">
-  
-                <?php echo $this->Nav(array('ulClass'=>'span2 well well-large'));?>
-
-                <div class="span10">                    
-                    <?php echo $this->layout()->content; ?>                   
-                </div>                
+            <div class="navbar navbar-inverse">            
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="brand" href="#">Planner</a>
+                    </div>
+                </div>            
             </div>
-            
-            <!--div class="progress progress-striped active">
-                <div class="bar" style="width: 100%;"></div>                
-            </div-->
 
+
+            <div class="row-fluid">
+
+                <div class="span2">
+                    <?php echo $this->Nav(array('ulClass'=>'well well-large nav nav-list'));?>
+                </div>
+
+
+                <div class="span10">        
+
+                    <?php 
+                    $messenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger'); 
+                    if ($messenger->hasCurrentMessages()): foreach($messenger->getCurrentMessages() AS $message): ?>
+
+                        <div class="alert <?php echo is_array($message) ? key($message) : ''; ?>">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <!--h4><?php echo is_array($message) ? strtolower(str_replace('alert-', '', key($message))) : 'alert';?>!</h4-->
+                            <?php echo is_array($message) ? current($message) : $message; ?>
+                        </div>
+                    <?php endforeach; endif; ?>
+
+
+                    <div class="well well-large">                    
+                        <?php echo $this->layout()->content; ?>                   
+                    </div>  
+
+                </div>
+
+                <!--div class="progress progress-striped active">
+                    <div class="bar" style="width: 100%;"></div>                
+                </div-->
+
+            </div>
         </div>
     </body>
 </html>

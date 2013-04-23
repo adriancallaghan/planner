@@ -8,14 +8,15 @@ class IndexController extends Zend_Controller_Action
         
         /* Initialize action controller here */
         $this->view->headScript()->exchangeArray(array());
-        $this->view->headScript()->appendFile($this->view->baseUrl('http://code.jquery.com/jquery.js'),'text/javascript');
+        $this->view->headScript()->appendFile('http://code.jquery.com/jquery.js','text/javascript');
         $this->view->headScript()->appendFile($this->view->baseUrl('/js/bootstrap.min.js'),'text/javascript');
         $this->view->headLink()->exchangeArray(array());
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap.min.css'));        
+        //$this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap-responsive.min.css'));        
         $this->view->doctype('XHTML1_STRICT');
         $this->view->headMeta()->exchangeArray(array());
         $this->view->headMeta()
-            ->appendName('keywords', 'Oracle, Homepage')
+            ->appendName('keywords', 'Homepage')
             ->appendHttpEquiv('viewport','width=device-width, initial-scale=1.0')
             ->appendHttpEquiv('pragma', 'no-cache')
             ->appendHttpEquiv('Cache-Control', 'no-cache')
@@ -30,7 +31,12 @@ class IndexController extends Zend_Controller_Action
     {
         // action body
         $this->view->headTitle('Homepage');
-        $this->view->Title = 'Homepage';
+        
+        $this->_helper->flashMessenger(array('alert-error'=>'Sorry, Error.'));           
+        $this->_helper->flashMessenger('You must do something.');           
+        $this->_helper->flashMessenger(array('alert-info'=>'Soon this changes.'));           
+        $this->_helper->flashMessenger(array('alert-success'=>'Well done!'));           
+        //$this->_helper->getHelper('Redirector')->gotoSimple('edit',null,null,array('article' =>$article->id));
         
     }
 

@@ -3,265 +3,35 @@
         
     <nav>
 
-        <!--home>
+        <home>
             <label>Home</label>
             <order>-100</order>
-            <module>admin</module>
+            <module>default</module>
             <controller>index</controller>
             <action>index</action>
-        </home-->
+        </home>
 
-        <articletags>
-            <label>Themes</label>
-            <id>Themes</id>
-            <order>40</order>
-            <module>admin</module>
-            <controller>themes</controller>
-            <action>index</action>
-            <pages>
-                <tagactive>
-                    <label>Tag Active</label>
-                    <id>tag_active</id>
-                    <module>admin</module>
-                    <controller>themes</controller>
-                    <action>active</action>
-                    <visible>0</visible>
-                </tagactive>
-                <tagorder>
-                    <label>Tag Order</label>
-                    <id>tag_order</id>
-                    <module>admin</module>
-                    <controller>themes</controller>
-                    <action>order</action>
-                    <visible>0</visible>
-                </tagorder>           
-            </pages>
-        </articletags>
-
-
-        <article_oftheday>
-            <label>Articles Of The Day</label>
-            <order>20</order>
-            <id>article_od</id>
-            <module>admin</module>
-            <controller>articlesoftheday</controller>
-            <action>index</action>
-            <visible>1</visible>
-            <pages>
-                <article_ofthedayform>
-                    <id>article_ofthedayform</id>
-                    <module>admin</module>
-                    <controller>articlesoftheday</controller>
-                    <action>ofthedayform</action>
-                    <visible>0</visible>
-                </article_ofthedayform>   
-                <article_choosearticleoftheday>
-                    <id>article_choosearticleoftheday</id>
-                    <module>admin</module>
-                    <controller>articlesoftheday</controller>
-                    <action>choosearticleoftheday</action>
-                    <visible>0</visible>
-                </article_choosearticleoftheday>             
-            </pages>
-        </article_oftheday>
-               
-
-
-        <article_home>
-            <label>Articles</label>
-            <id>article_home</id>
-            <uri>Articles</uri>
-            <module>admin</module>
-            <controller>article</controller>
+        <graphs>
+            <label>Graphs</label>
+            <id>graphs_home</id>
+            <uri>Graphs</uri>
+            <module>default</module>
+            <controller>graphs</controller>
             <action>index</action>
             <visible>1</visible>
             <order>10</order>
             <pages>
-                <article_edit>
-                    <label>Article Edit</label>
-                    <id>article_edit</id>
-                    <module>admin</module>
-                    <controller>article</controller>
-                    <action>edit</action>
-                    <visible>0</visible>
-                </article_edit>                              
+                <summary>
+                    <label>Summary</label>
+                    <id>summary_home</id>
+                    <module>default</module>
+                    <controller>summary</controller>
+                    <action>index</action>
+                    <visible>1</visible>
+                </summary>                              
             </pages>
-        </article_home>
-
-        <filemanager>
-            <label>File Manager</label>
-            <module>admin</module>
-            <order>30</order>
-            <controller>filemanager</controller>
-            <action>index</action>
-            <pages>
-                <image_edit>
-                    <label>Image Edit</label>
-                    <id>image_edit</id>
-                    <module>admin</module>
-                    <controller>filemanager</controller>
-                    <action>imageedit</action>
-                    <visible>0</visible>                    
-                </image_edit>                
-            </pages>
-            
-        </filemanager>
-
-        <events>
-            <label>Events</label>
-            <id>Events</id>
-            <module>admin</module>
-            <controller>events</controller>
-            <action>index</action>  
-            <order>50</order>  
-            <pages>
-                <eventactive>
-                    <label>Event Active</label>
-                    <id>event_active</id>
-                    <module>admin</module>
-                    <controller>events</controller>
-                    <action>active</action>
-                    <visible>0</visible>
-                </eventactive>
-            </pages>        
-        </events>
-        
-        
-        <ajax>
-            <module>admin</module>
-            <controller>ajax</controller>
-            <action>index</action>
-            <visible>0</visible>
-            <pages>
-                <decodemediatoarray>
-                    <id>decodemediatoarray</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>decodemediatoarray</action>
-                    <visible>0</visible>
-                </decodemediatoarray>
-                <appenditemtoencodedmedia>
-                    <id>appenditemtoencodedmedia</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>appenditemtoencodedmedia</action>
-                    <visible>0</visible>
-                </appenditemtoencodedmedia>
-                <changemediaorderandencode>
-                    <id>changemediaorderandencode</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>changemediaorderandencode</action>
-                    <visible>0</visible>
-                </changemediaorderandencode>
-                <article_media_order>
-                    <id>article_smo</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>savemediaorder</action>
-                    <visible>0</visible>
-                </article_media_order>
-                <article_media_fetch>
-                    <id>mediafetch</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>fetchmedia</action>
-                    <visible>0</visible>
-                </article_media_fetch>                
-                <article_media_deactivate>
-                    <id>article_media_deactivate</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>mediadeactivate</action>
-                    <visible>0</visible>
-                </article_media_deactivate>
-                <!--article_oftheday>
-                    <id>article_od</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>oftheday</action>
-                    <visible>0</visible>
-                </article_oftheday-->   
-                <articles_get>
-                    <id>articlesget</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>getarticles</action>
-                    <visible>0</visible>
-                </articles_get>
-                <article_media_link>
-                    <id>article_lk</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>linkedit</action>
-                    <visible>0</visible>
-                </article_media_link>     
-                <article_media_file>
-                    <id>article_fl</id>
-                    <module>admin</module>
-                    <controller>article</controller>
-                    <action>filepicker</action>
-                    <visible>0</visible>
-                </article_media_file>                  
-                <article_media_youtube>
-                    <id>article_yt</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>youtubeedit</action>
-                    <visible>0</visible>
-                </article_media_youtube>
-                <article_media_image>
-                    <id>article_im</id>
-                    <module>admin</module>
-                    <controller>article</controller>
-                    <action>imagepicker</action>
-                    <visible>0</visible>
-                </article_media_image>
-                <article_active>
-                    <id>article_active</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>articleactive</action>
-                    <visible>0</visible>
-                </article_active>
-                <getimages>
-                    <id>getimages</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>getimages</action>
-                    <visible>0</visible>
-                </getimages>    
-                <getfiles>
-                    <id>getfiles</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>getfiles</action>
-                    <visible>0</visible>
-                </getfiles>             
-                <upload_image>
-                    <id>uploadimage</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>uploadimage</action>
-                    <visible>0</visible>
-                </upload_image>
-                <upload_file>
-                    <id>uploadfile</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>uploadfile</action>
-                    <visible>0</visible>
-                </upload_file>
-                <upload_multi>
-                    <id>uploadmulti</id>
-                    <module>admin</module>
-                    <controller>ajax</controller>
-                    <action>uploadmulti</action>
-                    <visible>0</visible>
-                </upload_multi>
-            </pages>  
-        </ajax>
-        
+        </graphs>
+    
 
     </nav>
         

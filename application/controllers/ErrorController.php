@@ -8,7 +8,7 @@ class ErrorController extends Zend_Controller_Action
         
          /* Initialize action controller here */
         $this->view->headScript()->exchangeArray(array());
-        $this->view->headScript()->appendFile($this->view->baseUrl('http://code.jquery.com/jquery.js'),'text/javascript');
+        $this->view->headScript()->appendFile('http://code.jquery.com/jquery.js','text/javascript');
         $this->view->headScript()->appendFile($this->view->baseUrl('/js/bootstrap.min.js'),'text/javascript');
         $this->view->headLink()->exchangeArray(array());
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap.min.css'));        
