@@ -9,10 +9,10 @@ class IndexController extends Zend_Controller_Action
         /* Initialize action controller here */
         $this->view->headScript()->exchangeArray(array());
         $this->view->headScript()->appendFile('http://code.jquery.com/jquery.js','text/javascript');
-        //$this->view->headScript()->appendFile('http://code.jquery.com/ui/1.10.2/jquery-ui.js','text/javascript');
+        $this->view->headScript()->appendFile('http://code.jquery.com/ui/1.10.2/jquery-ui.js','text/javascript');
         $this->view->headScript()->appendFile($this->view->baseUrl('/js/bootstrap.min.js'),'text/javascript');
         $this->view->headLink()->exchangeArray(array());
-        //$this->view->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css');        
+        $this->view->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css');        
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap.min.css'));        
         //$this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap-responsive.min.css'));        
         $this->view->doctype('XHTML1_STRICT');

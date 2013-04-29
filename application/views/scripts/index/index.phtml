@@ -1,38 +1,66 @@
-<table class="table table-hover well-large" id="sortable">
-    <tr><th>Date</th><th>Balance</th><th>Amount</th><th>Details</th></tr>
-    <tbody>
-    <tr>
-        <td><a href="">19 April</a></td>
-        <td class="negative">-&pound;15.32</td>
-        <td class="negative"><a href="">-&pound;52.02</a></td>
-        <td>HeartInternet (Hosting) (R)</td>
-    </tr>
-    <tr>
-        <td>-</td>
-        <td>&pound;115.32</td>
-        <td class="negative">-&pound;32.01</td>
-        <td>O2 (Phone) (R)</td>
-    </tr>
-    <tr>
-        <td>-</td>
-        <td>&pound;215.32</td>
-        <td class="negative">-&pound;8.35</td>
-        <td>HeartInternet (Domain Renewal)</td>
-    </tr>
-    <tr>
-        <td>18 April</td>
-        <td>&pound;215.32</td>
-        <td class="positive">&pound;399.94</td>
-        <td>Lessrain (Travel Expenses) (R)</td>
-    </tr>
-    <tr>
-        <td>18 April</td>
-        <td>&pound;215.32</td>
-        <td class="positive">&pound;2317.94</td>
-        <td>Lessrain (Wages) (R)</td>
-    </tr>
+
+
+
+<table class="table table-hover well-large" id="spreadsheet">
+    
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Balance</th>
+            <th>Amount</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    <tbody clas="date" id="20130420" name="20th April">
+        <tr id="trans_5">
+            <td><a href="">20 April</a></td>
+            <td class="negative">-&pound;15.32</td>
+            <td class="negative"><a href="">-&pound;52.02</a></td>
+            <td>HeartInternet (Hosting) (R)</td>
+        </tr>
+        <tr id="trans_4">
+            <td>-</td>
+            <td>&pound;115.32</td>
+            <td class="negative">-&pound;32.01</td>
+            <td>O2 (Phone) (R)</td>
+        </tr>
+        <tr id="trans_3">
+            <td>-</td>
+            <td>&pound;215.32</td>
+            <td class="negative">-&pound;8.35</td>
+            <td>HeartInternet (Domain Renewal)</td>
+        </tr>
     </tbody>
+
+    <tbody class="date" id="20130419" name="19th April">
+        <tr class="date" id="trans_34121">
+            <td><a href="">19 April</a></td>
+            <td>&pound;215.32</td>
+            <td class="negative">-&pound;8.35</td>
+            <td>Everyday Account (Weekend Wage)</td>
+        </tr>
+    </tbody>
+
+    <tbody class="date" id="20130418" name="18th April">
+        <tr class="date" id="trans_32">
+            <td><a href="">18 April</a></td>
+            <td>&pound;215.32</td>
+            <td class="positive">&pound;399.94</td>
+            <td>Lessrain (Travel Expenses) (R)</td>
+        </tr>
+        <tr class="date" id="trans_312">
+            <td>-</td>
+            <td>&pound;215.32</td>
+            <td class="positive">&pound;2317.94</td>
+            <td>Lessrain (Wages) (R)</td>
+        </tr>
+    </tbody>
+        
 </table>
+
+
+
 
 <style type="text/css">
     .negative {color:#990000;}
@@ -44,21 +72,53 @@
 
 <script type="text/javascript">
 
-    /*var fixHelper = function(e, ui) {
+    var fixHelper = function(e, ui) {
         ui.children().each(function() {
             $(this).width($(this).width());
         });
         return ui;
     };
+    
+    function datesRebuild(ui){
+
+        ui.find('tbody').each(function() {
+
+            var isFirst = true;
+            var date = $(this).attr('name');
+            $(this).find('td').each(function(isFirst){
+
+                if (isFirst){
+                    $(this).find('td').first().html('title');
+                } else {
+                    //$(this).html('-');
+                }
+            });
+        });
+        return ui;
+        
+    }
+
 
     $(function() {
         
-        $("#sortable tbody").sortable({
+        var elem = $("#spreadsheet");
+        
+        
+        elem.find('tbody').sortable({
             helper: fixHelper,
-            placeholder: "ui-state-highlight"
+            placeholder: "ui-state-highlight",
+            connectWith: "tbody.date",
+            update : function(e, ui) {
+                var id = ui.item.attr('id');
+                var to = $(this).attr('id');
+                console.log('id: ' + id + ' to: ' + to);
+                //datesRebuild(elem);
+                //console.log(ui.item.first());
+            }
         }).disableSelection();
+
         
         //$( "#sortable" ).disableSelection();
-    });*/
+    });
 
 </script>
