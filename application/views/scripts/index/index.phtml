@@ -1,22 +1,19 @@
  
 
- <style>
-ul.date {border:1px solid red; padding-top:30px;width:300px;list-style: none;}
-ul.date li{background:yellow;}
+<style>
 
- .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 20px !important; }
-.ui-sortable-placeholder * { visibility: hidden; }
+    .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; }
+    .ui-sortable-placeholder * { visibility: hidden; }
 
-.negative {color:#990000;}
-.positive {color:#009900;}
-.neutral {}
-
+    .negative {color:#990000;}
+    .positive {color:#009900;}
+    .neutral {}
 </style>
 
 <script>
 $(function() {
-    $( ".date" ).sortable({
-        connectWith: ".date",
+    $( ".date ul" ).sortable({
+        connectWith: ".date ul",
         update : function(e, ui) {
                 var id = ui.item.attr('id');
                 var to = $(this).attr('id');
@@ -26,38 +23,65 @@ $(function() {
 });
 </script>
 
-<table class="table table-hover well-large" id="spreadsheet">
+<div class="row">
     
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Balance</th>
-            <th>Transactions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>DE1</td>
-            <td>Dynamic Bal</td>
-            <td>
-                <ul id="DE1" class="date">
-                    <li id="trans_1">Transaction 1</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>DE2</td>
-            <td>Dynamic Bal</td>
-            <td>
-                <ul id="DE2" class="date">
-                    <li id="trans_2">Transaction 2</li>
-                    <li id="trans_3">Transaction 3</li>
-                </ul>
-            </td>
-        </tr>
+    <div class="header well">
+        <div class="span1"></div>
+        <div class="span2">Date</div>
+        <div class="span2">Balance</div>
+        <div class="span7">Transactions</div> 
+    </div>
+    
+    <div class="date well well-small clearfix">
+        <div class="span1">    
+            <a class="btn btn-primary btn-small"  href="#">+</a>
+        </div>
+        <div class='span2'>
+            September 14th 
+        </div>
+        <div class="span2">&pound; DN</div>
+        <ul id="20130914" class="span7">
+        </ul>
         
-    </tbody>
-        
-</table>
+    </div>
+    
+    <div class="date well well-small clearfix">
+        <div class="span1">    
+            <a class="btn btn-primary btn-small"  href="#">+</a>
+        </div>
+        <div class='span2'>
+            September 13th 
+        </div>
+        <div class="span2">&pound; DN</div>
+        <ul id="20130913" class="span7">
+            <li id="trans_1">
+                <span class="negative">-&pound;23.43</span> Jennie <span class="label label-inverse">Loan</span> <span class="label">Children</span> **NOTE**
+            </li>
+            <li id="trans_2">
+                <span class="positive">&pound;35.00</span> Jennie <span class="label label-inverse">Loan</span> <span class="label">Children</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="date well well-small clearfix">
+        <div class="span1">    
+            <a class="btn btn-primary btn-small"  href="#">+</a>
+        </div>
+        <div class='span2'>
+            September 12th 
+        </div>
+        <div class="span2">&pound; DN</div>
+        <ul id="20130912" class="span7">
+            <li id="trans_3">
+                <span class="negative">-&pound;23.43</span> 02 <span class="label label-inverse">Bill</span>  
+            </li>
+            <li id="trans_4">
+                <span class="negative">-&pound;35.00</span> 02 <span class="label label-inverse">Deposit</span> 
+            </li>
+        </ul>
+    </div>
+    
+</div>  
+
 
 
