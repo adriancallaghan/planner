@@ -1,5 +1,30 @@
+ 
 
+ <style>
+ul.date {border:1px solid red; padding-top:30px;width:300px;list-style: none;}
+ul.date li{background:yellow;}
 
+ .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 20px !important; }
+.ui-sortable-placeholder * { visibility: hidden; }
+
+.negative {color:#990000;}
+.positive {color:#009900;}
+.neutral {}
+
+</style>
+
+<script>
+$(function() {
+    $( ".date" ).sortable({
+        connectWith: ".date",
+        update : function(e, ui) {
+                var id = ui.item.attr('id');
+                var to = $(this).attr('id');
+                console.log('id: ' + id + ' to: ' + to);
+            }
+    }).disableSelection();
+});
+</script>
 
 <table class="table table-hover well-large" id="spreadsheet">
     
@@ -7,118 +32,32 @@
         <tr>
             <th>Date</th>
             <th>Balance</th>
-            <th>Amount</th>
-            <th>Details</th>
+            <th>Transactions</th>
         </tr>
     </thead>
-
-    <tbody clas="date" id="20130420" name="20th April">
-        <tr id="trans_5">
-            <td><a href="">20 April</a></td>
-            <td class="negative">-&pound;15.32</td>
-            <td class="negative"><a href="">-&pound;52.02</a></td>
-            <td>HeartInternet (Hosting) (R)</td>
+    <tbody>
+        <tr>
+            <td>DE1</td>
+            <td>Dynamic Bal</td>
+            <td>
+                <ul id="DE1" class="date">
+                    <li id="trans_1">Transaction 1</li>
+                </ul>
+            </td>
         </tr>
-        <tr id="trans_4">
-            <td>-</td>
-            <td>&pound;115.32</td>
-            <td class="negative">-&pound;32.01</td>
-            <td>O2 (Phone) (R)</td>
+        <tr>
+            <td>DE2</td>
+            <td>Dynamic Bal</td>
+            <td>
+                <ul id="DE2" class="date">
+                    <li id="trans_2">Transaction 2</li>
+                    <li id="trans_3">Transaction 3</li>
+                </ul>
+            </td>
         </tr>
-        <tr id="trans_3">
-            <td>-</td>
-            <td>&pound;215.32</td>
-            <td class="negative">-&pound;8.35</td>
-            <td>HeartInternet (Domain Renewal)</td>
-        </tr>
-    </tbody>
-
-    <tbody class="date" id="20130419" name="19th April">
-        <tr class="date" id="trans_34121">
-            <td><a href="">19 April</a></td>
-            <td>&pound;215.32</td>
-            <td class="negative">-&pound;8.35</td>
-            <td>Everyday Account (Weekend Wage)</td>
-        </tr>
-    </tbody>
-
-    <tbody class="date" id="20130418" name="18th April">
-        <tr class="date" id="trans_32">
-            <td><a href="">18 April</a></td>
-            <td>&pound;215.32</td>
-            <td class="positive">&pound;399.94</td>
-            <td>Lessrain (Travel Expenses) (R)</td>
-        </tr>
-        <tr class="date" id="trans_312">
-            <td>-</td>
-            <td>&pound;215.32</td>
-            <td class="positive">&pound;2317.94</td>
-            <td>Lessrain (Wages) (R)</td>
-        </tr>
+        
     </tbody>
         
 </table>
 
 
-
-
-<style type="text/css">
-    .negative {color:#990000;}
-    .positive {color:#009900;}
-    .neutral {}
-</style>
-
-
-
-<script type="text/javascript">
-
-    var fixHelper = function(e, ui) {
-        ui.children().each(function() {
-            $(this).width($(this).width());
-        });
-        return ui;
-    };
-    
-    function datesRebuild(ui){
-
-        ui.find('tbody').each(function() {
-
-            var isFirst = true;
-            var date = $(this).attr('name');
-            $(this).find('td').each(function(isFirst){
-
-                if (isFirst){
-                    $(this).find('td').first().html('title');
-                } else {
-                    //$(this).html('-');
-                }
-            });
-        });
-        return ui;
-        
-    }
-
-
-    $(function() {
-        
-        var elem = $("#spreadsheet");
-        
-        
-        elem.find('tbody').sortable({
-            helper: fixHelper,
-            placeholder: "ui-state-highlight",
-            connectWith: "tbody.date",
-            update : function(e, ui) {
-                var id = ui.item.attr('id');
-                var to = $(this).attr('id');
-                console.log('id: ' + id + ' to: ' + to);
-                //datesRebuild(elem);
-                //console.log(ui.item.first());
-            }
-        }).disableSelection();
-
-        
-        //$( "#sortable" ).disableSelection();
-    });
-
-</script>

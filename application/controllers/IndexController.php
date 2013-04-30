@@ -34,10 +34,10 @@ class IndexController extends Zend_Controller_Action
         // action body
         $this->view->headTitle('Homepage');
         
-        $this->_helper->flashMessenger(array('alert-error'=>'Sorry, Error.'));           
-        $this->_helper->flashMessenger('You must do something.');           
-        $this->_helper->flashMessenger(array('alert-info'=>'Soon this changes.'));           
-        $this->_helper->flashMessenger(array('alert-success'=>'Well done!'));           
+        //$this->_helper->flashMessenger(array('alert-error'=>'Sorry, Error.'));           
+        //$this->_helper->flashMessenger('You must do something.');           
+        //$this->_helper->flashMessenger(array('alert-info'=>'Soon this changes.'));           
+        //$this->_helper->flashMessenger(array('alert-success'=>'Well done!'));           
         //$this->_helper->getHelper('Redirector')->gotoSimple('edit',null,null,array('article' =>$article->id));
         
     }

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
+    <script>
+        
+        var stage, circle1, circle2, hud1, hud2;
+        
+        function init() {
+                stage = new createjs.Stage("demoCanvas");
+
+                circle1 = new createjs.Shape();
+                circle1.graphics.beginFill("#cc00cc").drawCircle(0, 0, 20);
+                circle1.speed = 20;
+                circle1.acceleration = 5;
+                stage.addChild(circle1);
+
+                circle2 = new createjs.Shape();
+                circle2.graphics.beginFill("#cccc00").drawCircle(0, 0, 50);
+                circle2.speed = 10;
+                circle2.acceleration = 2;
+                circle2.x = Math.random()* stage.canvas.width;
+                circle2.y = Math.random()* stage.canvas.height;
+                stage.addChild(circle2);
+
+                hud1 = new createjs.Text("Ball 1", "15px Arial", "#cc00cc");
+                hud1.x = 0;
+                stage.addChild(hud1);
+                
+                hud2 = new createjs.Text("Ball 2", "15px Arial", "#cccc00");
+                hud2.x = stage.canvas.width - 100;
+                stage.addChild(hud2);
+                
+                createjs.Ticker.addListener(this);
+                createjs.Ticker.setFPS(60);
+        }
+
+        function tick(elapsedTime) {
+            
+            
+                circle1.speed = circle1.speed + elapsedTime/1000*circle1.acceleration;
+                circle2.speed = circle2.speed + elapsedTime/1000*circle2.acceleration;
+            
+            
+                if (circle1.x < 1) {
+                        //circle1.x = 0;
+                    circle1.xdirection = 'right';
+                }
+                
+                if (circle1.x > stage.canvas.width) {
+                        //circle1.x = 0;
+                    circle1.xdirection = 'left';
+                }
+                
+                
+                if (circle1.xdirection == "right"){
+                    circle1.x = circle1.x + elapsedTime/1000*circle1.speed;
+                } else {
+                    circle1.x = circle1.x - elapsedTime/1000*circle1.speed;
+                }
+                
+
+                if (circle1.y < 1) {
+                        //circle1.x = 0;
+                    circle1.ydirection = 'down';
+                }
+                
+                if (circle1.y > stage.canvas.height) {
+                        //circle1.x = 0;
+                    circle1.ydirection = 'up';
+                }
+                
+                
+                if (circle1.ydirection == "down"){
+                    circle1.y = circle1.y + elapsedTime/1000*circle1.speed;
+                } else {
+                    circle1.y = circle1.y - elapsedTime/1000*circle1.speed;
+                }
+
+                if (circle2.x < 1) {
+                        //circle2.x = 0;
+                    circle2.xdirection = 'right';
+                }
+                
+                if (circle2.x > stage.canvas.width) {
+                        //circle2.x = 0;
+                    circle2.xdirection = 'left';
+                }
+                
+                
+                if (circle2.xdirection == "right"){
+                    
+                    circle2.x = circle2.x + elapsedTime/1000*circle2.speed;
+                } else {
+                    circle2.x = circle2.x - elapsedTime/1000*circle2.speed;
+                }
+                
+
+                if (circle2.y < 1) {
+                        //circle2.x = 0;
+                    circle2.ydirection = 'down';
+                }
+                
+                if (circle2.y > stage.canvas.height) {
+                        //circle2.x = 0;
+                    circle2.ydirection = 'up';
+                }
+                
+                
+                if (circle2.ydirection == "down"){
+                    circle2.y = circle2.y + elapsedTime/1000*circle2.speed;
+                } else {
+                    circle2.y = circle2.y - elapsedTime/1000*circle2.speed;
+                }
+
+var pt1 = circle1.globalToLocal(stage.mouseX, stage.mouseY);
+if (stage.mouseInBounds && circle1.hitTest(pt1.x, pt1.y)) {
+                    
+                    if (circle1.ydirection == 'up'){
+                        circle1.ydirection = 'down';
+                    } else {
+                        circle1.ydirection = 'up';
+                    }
+                    if (circle1.xdirection == 'left'){
+                        circle1.xdirection = 'right';
+                    } else {
+                        circle1.xdirection = 'left';
+                    }
+            
+                }
+                
+                var pt = circle1.localToLocal(0,0,circle2);
+                if (circle2.hitTest(pt.x, pt.y)) {
+   
+                    if (circle1.ydirection == 'up'){
+                        circle1.ydirection = 'down';
+                    } else {
+                        circle1.ydirection = 'up';
+                    }
+                    if (circle1.xdirection == 'left'){
+                        circle1.xdirection = 'right';
+                    } else {
+                        circle1.xdirection = 'left';
+                    }
+                   
+                   
+                    if (circle2.ydirection == 'up'){
+                        circle2.ydirection = 'down';
+                    } else {
+                        circle2.ydirection = 'up';
+                    }
+                    if (circle2.xdirection == 'left'){
+                        circle2.xdirection = 'right';
+                    } else {
+                        circle2.xdirection = 'left';
+                    }
+            
+                }
+                
+                hud1.text = "X: " + circle1.x + " Y:" + circle1.y + " SPD: " + circle1.speed;
+                hud2.text = "X: " + circle2.x + " Y:" + circle2.y + " SPD: " + circle2.speed;
+                
+                stage.update(); // important!!
+        }
+        
+    </script>
+</head>
+<body onLoad="init();">
+    <canvas id="demoCanvas" width="600" height="500" style="border:1px solid #000; background:#333333;">
+        alternate content
+    </canvas>
+</body>
+</html>
