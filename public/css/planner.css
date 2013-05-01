@@ -1,0 +1,45 @@
+/*
+
+
+   @app    planner 
+   @author Adrian Callaghan 
+   @date   01092013
+
+
+*/
+
+/*
+Date STARTS ///
+*/
+.header {
+    padding:20px 0;
+    font-weight:bolder;
+}
+.date {
+    padding:10px 0;
+    border-top: 1px solid #cccccc;
+}
+
+
+/*
+Transactions STARTS ///
+*/
+ul.transactions {
+}
+/* JQUERY UI PLACEHOLDER FOR TRANSACTIONS */
+.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; }
+.ui-sortable-placeholder * { visibility: hidden; }
+/*
+Transactions ENDS ///
+*/
+
+
+/*
+Helper classes START ///
+*/
+.negative {color:#990000;}
+.positive {color:#009900;}
+.neutral {}
+/*
+Helper classes END ///
+*/

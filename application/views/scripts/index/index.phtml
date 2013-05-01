@@ -1,16 +1,126 @@
  
 
-<style>
+<?php
 
-    .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; }
-    .ui-sortable-placeholder * { visibility: hidden; }
+$dates = (object) array(
+    '20130914'=>(object) array(
+        'unix'=>mktime(0,0,0,9,14,2013),
+        'balance'=>'321.53',
+        'transactions'=>(object) array()
+    ),
+    '20130913'=>(object) array(
+        'unix'=>mktime(0,0,0,9,13,2013),
+        'balance'=>'321.53',
+        'transactions'=>(object) array(
+            '1'=>(object) array(
+                'account'=>'Jennie',
+                'amount'=>'312.42',
+                'type'=>'loan',
+                'tags'=>(object)array('children'),
+                'note'=>''
+                ),
+            '2'=>(object) array(
+                'account'=>'Jennie',
+                'amount'=>'-312.42',
+                'type'=>'loan',
+                'tags'=>(object)array('children'),
+                'note'=>''
+                ),
+            '3'=>(object) array(
+                'account'=>'HeartInternet',
+                'amount'=>'8.99',
+                'type'=>'domain renewal',
+                'tags'=>(object)array(),
+                'note'=>'Adriancallaghan.co.uk'
+                )
+        )
+    ),
+    '20130912'=>(object) array(
+        'unix'=>mktime(0,0,0,9,12,2013),
+        'balance'=>'321.53',
+        'transactions'=>(object) array(
+            '4'=>(object) array(
+                'account'=>'HeartInternet',
+                'amount'=>'8.99',
+                'type'=>'mobile bill',
+                'tags'=>(object)array(),
+                'note'=>''
+                )
+        )
+    )
+);
 
-    .negative {color:#990000;}
-    .positive {color:#009900;}
-    .neutral {}
-</style>
+?>
 
-<script>
+
+<div class="row well well-small">
+    
+    <div class="header clearfix">
+        <div class="span1"></div>
+        <div class="span2">Date</div>
+        <div class="span2">Balance</div>
+        <div class="span7">Transactions</div> 
+    </div>
+    
+    
+    <?php foreach ($dates AS $dateKey=>$dateVal) : ?>
+        <div class="date clearfix">
+            
+            <!-- Add Button -->
+            <div class="span1">    
+                <a class="btn btn-primary btn-small"  href="#">+</a>
+            </div>
+            
+            <!-- Date -->
+            <div class='span2'>
+                <?php echo date('jS M Y',$dateVal->unix); ?>
+            </div>
+            
+            <!-- Balance -->
+            <div class="span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
+                &pound; <?php echo $dateVal->balance; ?>
+            </div>
+            
+            <!-- Transactions -->
+            <ul id="<?php echo $dateKey; ?>" class="span7">
+                <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
+                    <li id="<?php echo $transKey; ?>">
+                        
+                        <div class="span1 <?php echo $transVal->amount==0 ? 'neutral' : $transVal->amount>0 ? 'positive' : 'negative'; ?>">
+                            &pound;<?php echo $transVal->amount; ?>
+                        </div> 
+                        
+                        <div class="span2">
+                            <span class="label label-success"><?php echo $transVal->account; ?></span>
+                        </div>
+                        
+                        <div class="span2">                            
+                            <span class="label label-inverse"><?php echo $transVal->type; ?></span>
+                        </div> 
+                        
+                        <div class="span3">
+                            <?php foreach($transVal->tags AS $tag): ?>
+                                <span class="label">
+                                    <?php echo $tag; ?>
+                                </span>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <div class="span4">                            
+                            <span class="label label-info"><?php echo $transVal->note; ?></span>
+                        </div> 
+
+                        
+                    </li>
+                <?php endforeach; ?>
+            </ul>     
+            
+        </div>
+    <?php endforeach; ?>    
+    
+</div>  
+
+<script type='text/javascript'>
 $(function() {
     $( ".date ul" ).sortable({
         connectWith: ".date ul",
@@ -22,66 +132,4 @@ $(function() {
     }).disableSelection();
 });
 </script>
-
-<div class="row">
-    
-    <div class="header well">
-        <div class="span1"></div>
-        <div class="span2">Date</div>
-        <div class="span2">Balance</div>
-        <div class="span7">Transactions</div> 
-    </div>
-    
-    <div class="date well well-small clearfix">
-        <div class="span1">    
-            <a class="btn btn-primary btn-small"  href="#">+</a>
-        </div>
-        <div class='span2'>
-            September 14th 
-        </div>
-        <div class="span2">&pound; DN</div>
-        <ul id="20130914" class="span7">
-        </ul>
-        
-    </div>
-    
-    <div class="date well well-small clearfix">
-        <div class="span1">    
-            <a class="btn btn-primary btn-small"  href="#">+</a>
-        </div>
-        <div class='span2'>
-            September 13th 
-        </div>
-        <div class="span2">&pound; DN</div>
-        <ul id="20130913" class="span7">
-            <li id="trans_1">
-                <span class="negative">-&pound;23.43</span> Jennie <span class="label label-inverse">Loan</span> <span class="label">Children</span> **NOTE**
-            </li>
-            <li id="trans_2">
-                <span class="positive">&pound;35.00</span> Jennie <span class="label label-inverse">Loan</span> <span class="label">Children</span>
-            </li>
-        </ul>
-    </div>
-    
-    <div class="date well well-small clearfix">
-        <div class="span1">    
-            <a class="btn btn-primary btn-small"  href="#">+</a>
-        </div>
-        <div class='span2'>
-            September 12th 
-        </div>
-        <div class="span2">&pound; DN</div>
-        <ul id="20130912" class="span7">
-            <li id="trans_3">
-                <span class="negative">-&pound;23.43</span> 02 <span class="label label-inverse">Bill</span>  
-            </li>
-            <li id="trans_4">
-                <span class="negative">-&pound;35.00</span> 02 <span class="label label-inverse">Deposit</span> 
-            </li>
-        </ul>
-    </div>
-    
-</div>  
-
-
 
