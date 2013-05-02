@@ -2,6 +2,8 @@
 
 <?php
 
+$todayKey = '20130913';
+
 $dates = (object) array(
     '20130914'=>(object) array(
         'unix'=>mktime(0,0,0,9,14,2013),
@@ -12,26 +14,29 @@ $dates = (object) array(
         'unix'=>mktime(0,0,0,9,13,2013),
         'balance'=>'321.53',
         'transactions'=>(object) array(
-            '1'=>(object) array(
+            't1'=>(object) array(
                 'account'=>'Jennie',
                 'amount'=>'312.42',
                 'type'=>'loan',
                 'tags'=>(object)array('children'),
-                'note'=>''
+                'note'=>'',
+                'order'=>1
                 ),
-            '2'=>(object) array(
+            't2'=>(object) array(
                 'account'=>'Jennie',
                 'amount'=>'-312.42',
                 'type'=>'loan',
                 'tags'=>(object)array('children'),
-                'note'=>''
+                'note'=>'',
+                'order'=>2
                 ),
-            '3'=>(object) array(
+            't3'=>(object) array(
                 'account'=>'HeartInternet',
                 'amount'=>'8.99',
                 'type'=>'domain renewal',
                 'tags'=>(object)array(),
-                'note'=>'Adriancallaghan.co.uk'
+                'note'=>'Adriancallaghan.co.uk',
+                'order'=>3
                 )
         )
     ),
@@ -39,12 +44,13 @@ $dates = (object) array(
         'unix'=>mktime(0,0,0,9,12,2013),
         'balance'=>'321.53',
         'transactions'=>(object) array(
-            '4'=>(object) array(
+            't4'=>(object) array(
                 'account'=>'HeartInternet',
                 'amount'=>'8.99',
                 'type'=>'mobile bill',
                 'tags'=>(object)array(),
-                'note'=>''
+                'note'=>'',
+                'order'=>1
                 )
         )
     )
@@ -53,9 +59,9 @@ $dates = (object) array(
 ?>
 
 
-<div class="row well well-small">
+<div class="row well well-large">
     
-    <div class="header clearfix">
+    <div class="table-header clearfix">
         <div class="span1"></div>
         <div class="span2">Date</div>
         <div class="span2">Balance</div>
@@ -64,41 +70,41 @@ $dates = (object) array(
     
     
     <?php foreach ($dates AS $dateKey=>$dateVal) : ?>
-        <div class="date clearfix">
+        <div class="table-row clearfix <?php if ($todayKey==$dateKey) echo 'current'; ?>">
             
             <!-- Add Button -->
-            <div class="span1">    
-                <a class="btn btn-primary btn-small"  href="#">+</a>
+            <div class="date-options well well-small span1">    
+                <a class="btn btn-mini btn-success"  href="#">+</a>
             </div>
             
             <!-- Date -->
-            <div class='span2'>
+            <div class='date-title well well-small span2'>
                 <?php echo date('jS M Y',$dateVal->unix); ?>
             </div>
             
             <!-- Balance -->
-            <div class="span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
+            <div class="date-balance well well-small span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
                 &pound; <?php echo $dateVal->balance; ?>
             </div>
             
             <!-- Transactions -->
-            <ul id="<?php echo $dateKey; ?>" class="span7">
+            <ul id="<?php echo $dateKey; ?>" class="span7 date-transactions unstyled well well-small">
                 <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
                     <li id="<?php echo $transKey; ?>">
                         
-                        <div class="span1 <?php echo $transVal->amount==0 ? 'neutral' : $transVal->amount>0 ? 'positive' : 'negative'; ?>">
+                        <div class="span1 transaction-amount <?php echo $transVal->amount==0 ? 'neutral' : $transVal->amount>0 ? 'positive' : 'negative'; ?>">
                             &pound;<?php echo $transVal->amount; ?>
                         </div> 
                         
-                        <div class="span2">
+                        <div class="span2 transaction-account">
                             <span class="label label-success"><?php echo $transVal->account; ?></span>
                         </div>
                         
-                        <div class="span2">                            
+                        <div class="span2 transaction-type">                            
                             <span class="label label-inverse"><?php echo $transVal->type; ?></span>
                         </div> 
                         
-                        <div class="span3">
+                        <div class="span3 transaction-tags">
                             <?php foreach($transVal->tags AS $tag): ?>
                                 <span class="label">
                                     <?php echo $tag; ?>
@@ -106,8 +112,8 @@ $dates = (object) array(
                             <?php endforeach; ?>
                         </div>
                         
-                        <div class="span4">                            
-                            <span class="label label-info"><?php echo $transVal->note; ?></span>
+                        <div class="span4 transaction-note">                            
+                            <?php echo $transVal->note; ?>
                         </div> 
 
                         
@@ -122,12 +128,16 @@ $dates = (object) array(
 
 <script type='text/javascript'>
 $(function() {
-    $( ".date ul" ).sortable({
-        connectWith: ".date ul",
+    $(".date-transactions").sortable({
+        connectWith: ".date-transactions",
+        opacity: 0.6, 
+        cursor: 'move',
         update : function(e, ui) {
                 var id = ui.item.attr('id');
                 var to = $(this).attr('id');
                 console.log('id: ' + id + ' to: ' + to);
+                console.log('order: ')
+                console.log($(this).children());
             }
     }).disableSelection();
 });
