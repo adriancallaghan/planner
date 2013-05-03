@@ -10,6 +10,13 @@
             <controller>index</controller>
             <action>index</action>
         </home>
+        <accounts>
+            <label>Accounts</label>
+            <order>-100</order>
+            <module>default</module>
+            <controller>accounts</controller>
+            <action>index</action>
+        </accounts>
 
         <graphs>
             <label>Graphs</label>
@@ -27,7 +34,7 @@
                     <module>default</module>
                     <controller>summary</controller>
                     <action>index</action>
-                    <visible>1</visible>
+                    <visible>0</visible>
                 </summary>                              
             </pages>
         </graphs>

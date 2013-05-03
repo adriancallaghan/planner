@@ -7,44 +7,30 @@
 
 
 */
-
-
-/*
-Table generic formatting
-*/
-div.table-header {
-    padding:10px 0;
-    font-weight:bolder;
-}
-div.table-row {
-    padding:10px;
-    border-top: 1px solid #cccccc;
+body{
+    padding-top: 60px;
+    padding-bottom: 40px;
 }
 
-/*
-Table, date specific  
-*/
-div.table-row div.date-options {background:#FCF8E3;}
-div.table-row div.date-title {background:#FCF8E3;}
-div.table-row div.date-balance {background:#FCF8E3;}
-div.table-row ul.date-transactions {background:#FCF8E3;}
+div.div-table-header {
+    font-weight:bold;
+}
 
-/*
-Today
-*/
-div.table-row.current div.date-options{background:#DFF0D8;}
-div.table-row.current div.date-title{background:#DFF0D8;}
-div.table-row.current div.date-balance{background:#DFF0D8;}
-div.table-row.current ul.date-transactions{background:#DFF0D8;}
+/* general */
+/*div.date {background:#FCF8E3;}*/
+/* Today */
+div.date.current {background:#DFF0D8;}
+
 /*
 Transaction specific 
 */
-div.table-row ul.date-transactions li {margin: 0 3px 3px 3px; min-height: 20px; }
-div.table-row ul.date-transactions li div.transaction-amount{}
-div.table-row ul.date-transactions li div.transaction-account{}
-div.table-row ul.date-transactions li div.transaction-type{}
-div.table-row ul.date-transactions li div.transaction-tags{}
-div.table-row ul.date-transactions li div.transaction-note{font-style:italic; font-size:10px;}
+div.date-transactions ul {min-height: 20px;}
+div.date-transactions ul li {margin: 0 3px 3px 3px; min-height: 20px;}
+div.date-transactions ul li div.transaction-amount{}
+div.date-transactions ul li div.transaction-account{}
+div.date-transactions ul li div.transaction-type{}
+div.date-transactions ul li div.transaction-tags{}
+div.date-transactions ul li div.transaction-note{font-style:italic; font-size:10px; background:white;}
 
 
 
@@ -63,6 +49,7 @@ Helper classes START ///
 .negative {color:#990000;}
 .positive {color:#009900;}
 .neutral {}
+.red {background:red;} /* used to debug css */
 /*
 Helper classes END ///
 */

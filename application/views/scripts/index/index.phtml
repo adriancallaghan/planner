@@ -1,135 +1,93 @@
- 
 
-<?php
+<div class="div-table container-fluid well well-small">
 
-$todayKey = '20130913';
-
-$dates = (object) array(
-    '20130914'=>(object) array(
-        'unix'=>mktime(0,0,0,9,14,2013),
-        'balance'=>'321.53',
-        'transactions'=>(object) array()
-    ),
-    '20130913'=>(object) array(
-        'unix'=>mktime(0,0,0,9,13,2013),
-        'balance'=>'321.53',
-        'transactions'=>(object) array(
-            't1'=>(object) array(
-                'account'=>'Jennie',
-                'amount'=>'312.42',
-                'type'=>'loan',
-                'tags'=>(object)array('children'),
-                'note'=>'',
-                'order'=>1
-                ),
-            't2'=>(object) array(
-                'account'=>'Jennie',
-                'amount'=>'-312.42',
-                'type'=>'loan',
-                'tags'=>(object)array('children'),
-                'note'=>'',
-                'order'=>2
-                ),
-            't3'=>(object) array(
-                'account'=>'HeartInternet',
-                'amount'=>'8.99',
-                'type'=>'domain renewal',
-                'tags'=>(object)array(),
-                'note'=>'Adriancallaghan.co.uk',
-                'order'=>3
-                )
-        )
-    ),
-    '20130912'=>(object) array(
-        'unix'=>mktime(0,0,0,9,12,2013),
-        'balance'=>'321.53',
-        'transactions'=>(object) array(
-            't4'=>(object) array(
-                'account'=>'HeartInternet',
-                'amount'=>'8.99',
-                'type'=>'mobile bill',
-                'tags'=>(object)array(),
-                'note'=>'',
-                'order'=>1
-                )
-        )
-    )
-);
-
-?>
-
-
-<div class="row well well-large">
-    
-    <div class="table-header clearfix">
-        <div class="span1"></div>
+    <!-- header -->
+    <div class="div-table-header row-fluid">
         <div class="span2">Date</div>
         <div class="span2">Balance</div>
-        <div class="span7">Transactions</div> 
+        <div class="span8">Transactions</div> 
     </div>
+
+    <?php foreach($this->dates AS $dateKey=>$dateVal) : ?>
     
-    
-    <?php foreach ($dates AS $dateKey=>$dateVal) : ?>
-        <div class="table-row clearfix <?php if ($todayKey==$dateKey) echo 'current'; ?>">
-            
-            <!-- Add Button -->
-            <div class="date-options well well-small span1">    
-                <a class="btn btn-mini btn-success"  href="#">+</a>
-            </div>
-            
-            <!-- Date -->
-            <div class='date-title well well-small span2'>
+        <!-- content -->
+        <div class="div-table-row row-fluid date <?php if ($this->todayKey==$dateKey) echo 'current'; ?>">
+
+ 
+            <!-- Add Button / Date -->
+            <div class='date-title span2'>
+                <a class="btn btn-mini btn-success"  href="#">+</a>&nbsp;
                 <?php echo date('jS M Y',$dateVal->unix); ?>
             </div>
+
             
             <!-- Balance -->
-            <div class="date-balance well well-small span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
+            <div class="date-balance span1 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
                 &pound; <?php echo $dateVal->balance; ?>
             </div>
-            
-            <!-- Transactions -->
-            <ul id="<?php echo $dateKey; ?>" class="span7 date-transactions unstyled well well-small">
-                <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
-                    <li id="<?php echo $transKey; ?>">
-                        
-                        <div class="span1 transaction-amount <?php echo $transVal->amount==0 ? 'neutral' : $transVal->amount>0 ? 'positive' : 'negative'; ?>">
-                            &pound;<?php echo $transVal->amount; ?>
-                        </div> 
-                        
-                        <div class="span2 transaction-account">
-                            <span class="label label-success"><?php echo $transVal->account; ?></span>
-                        </div>
-                        
-                        <div class="span2 transaction-type">                            
-                            <span class="label label-inverse"><?php echo $transVal->type; ?></span>
-                        </div> 
-                        
-                        <div class="span3 transaction-tags">
-                            <?php foreach($transVal->tags AS $tag): ?>
-                                <span class="label">
-                                    <?php echo $tag; ?>
-                                </span>
-                            <?php endforeach; ?>
-                        </div>
-                        
-                        <div class="span4 transaction-note">                            
-                            <?php echo $transVal->note; ?>
-                        </div> 
 
-                        
-                    </li>
-                <?php endforeach; ?>
-            </ul>     
-            
+
+            <!-- Transactions -->   
+            <div class="date-transactions span9">
+                <ul id="<?php echo $dateKey; ?>" class="unstyled">
+                    <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
+                        <li id="<?php echo $transKey; ?>" class="clearfix">
+
+                            <div class="span2 transaction-amount <?php echo $transVal->amount>0 ? 'positive' : 'negative'; ?>">                                
+                                &pound;<input type="text" placeholder="0.00" value="<?php echo $transVal->amount; ?>" class="span10">
+                            </div> 
+
+                            <div class="span2 transaction-type"> 
+                                <select class="span12">
+                                    <?php foreach ($this->transactionTypes AS $typeKey=>$typeName) {
+                                        $selected = $transVal->type==$typeKey ? 'selected="SELECTED"' : '';
+                                        echo "<option id='$typeKey' $selected>$typeName</option>";
+                                    } ?>
+                                </select>
+                            </div> 
+                            
+                            <div class="span2">
+                                <?php echo $transVal->amount>0 ? 'payment from' : 'payment to'; ?>
+                            </div>
+                            
+                            <div class="span2 transaction-account">                              
+                                <select class="span12">
+                                    <?php foreach ($this->accounts AS $accountKey=>$accountName) {
+                                        $selected = $transVal->account==$accountKey ? 'selected="SELECTED"' : '';
+                                        echo "<option id='$accountKey' $selected>$accountName</option>";
+                                    } ?>
+                                </select>
+                            </div>
+
+
+
+                            <div class="span2 transaction-tags">
+                                <?php foreach($transVal->tags AS $tag) {                                    
+                                    if (isset($this->transactionsTags[$tag])){
+                                        echo "<span class='label'>{$this->transactionsTags[$tag]}</span>&nbsp;";
+                                    }
+                                 }?>
+                            </div>
+
+                            <?php if ($transVal->note!=='') : ?>                                
+                                <div class="span2 transaction-note">  
+                                    <textarea rows="3" class="span12"><?php echo $transVal->note; ?></textarea>                                    
+                                </div> 
+                            <?php endif; ?>
+
+                        </li>
+                    <?php endforeach; ?>
+                </ul> 
+            </div>
         </div>
-    <?php endforeach; ?>    
-    
-</div>  
+    <?php endforeach; ?>
+</div>
+
 
 <script type='text/javascript'>
 $(function() {
-    $(".date-transactions").sortable({
-        connectWith: ".date-transactions",
+    $(".date-transactions ul").sortable({
+        connectWith: ".date-transactions ul",
         opacity: 0.6, 
         cursor: 'move',
         update : function(e, ui) {
@@ -139,7 +97,7 @@ $(function() {
                 console.log('order: ')
                 console.log($(this).children());
             }
-    }).disableSelection();
+    });
 });
 </script>
 
