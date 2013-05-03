@@ -29,10 +29,39 @@
 
             <!-- Transactions -->   
             <div class="date-transactions span9">
-                <ul id="<?php echo $dateKey; ?>" class="unstyled">
+                <ul id="<?php echo $dateKey; ?>" class="unstyled inline">
                     <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
                         <li id="<?php echo $transKey; ?>" class="clearfix">
 
+                            <?php                             
+                            $classes = $transVal->amount>0 ? 'btn btn-small btn-success' : 'btn btn-small btn-danger';
+                            $account = isset($this->accounts[$transVal->account]) ? $this->accounts[$transVal->account] : 'unknown'; 
+                            $details = '&pound;'.str_replace('-', '', $transVal->amount).' '.($transVal->amount>0 ? 'from' : 'to'). ' '.$account;
+                            ?>
+                            
+                            <div class="btn-group">
+
+                                <a title="" 
+                                   data-content="Transaction details are type: <?php echo $transVal->type; ?>" 
+                                   data-placement="top" 
+                                   data-toggle="popover" 
+                                   class="<?php echo $classes; ?>" 
+                                   href="#" 
+                                   data-original-title="<?php echo $account; ?>"><?php echo $details; ?></a>
+
+                                    <button class="dropdown-toggle <?php echo $classes; ?>" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="">Edit</a></li>
+                                        <li><a href="">Disable</a></li>                                    
+                                    </ul>
+ 
+                            
+                            
+                            </div>
+                                   
+                                   <?php /*
                             <div class="span2 transaction-amount <?php echo $transVal->amount>0 ? 'positive' : 'negative'; ?>">                                
                                 &pound;<input type="text" placeholder="0.00" value="<?php echo $transVal->amount; ?>" class="span10">
                             </div> 
@@ -75,6 +104,7 @@
                                 </div> 
                             <?php endif; ?>
 
+                            */ ?>
                         </li>
                     <?php endforeach; ?>
                 </ul> 
@@ -86,6 +116,9 @@
 
 <script type='text/javascript'>
 $(function() {
+    
+    $('.btn').popover();
+    
     $(".date-transactions ul").sortable({
         connectWith: ".date-transactions ul",
         opacity: 0.6, 
