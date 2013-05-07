@@ -45,9 +45,14 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->flashMessenger(array('alert-success'=>'Transaction moved'));
         
         
-        $this->view->transactionTypes = array(1=>'Debit',2=>'Loan',3=>'One off',4=>'Deposit');
-        $this->view->accounts = array(1=>'Jennie',2=>'Dad',3=>'02',4=>'HeartInternet');
-        $this->view->transactionsTags = array(1=>'mobile',2=>'car',3=>'children',4=>'hosting',5=>'takeaways');
+        
+        
+        $this->view->transactionTypes = array(1=>'Bill',2=>'Loan',3=>'Payment',4=>'Deposit');
+        $this->view->accounts = array(1=>'Jennie',2=>'Dad',3=>'02',4=>'HeartInternet',5=>'Orange',6=>'Adrian');
+        $this->view->transactionTags = array(1=>'mobile',2=>'car',3=>'children',4=>'hosting',5=>'takeaway',6=>'domain');
+        
+        
+        
         
         
         $this->view->todayKey = '20130917';
@@ -85,7 +90,31 @@ class IndexController extends Zend_Controller_Action
                         'tags'=>(object)array(4),
                         'note'=>'Adriancallaghan.co.uk renewal',
                         'order'=>3
-                        )
+                        ),
+                    't4'=>(object) array(
+                        'account'=>4,
+                        'amount'=>'-25.99',
+                        'type'=>1,
+                        'tags'=>(object)array(4),
+                        'note'=>'',
+                        'order'=>4
+                        ),
+                    't5'=>(object) array(
+                        'account'=>4,
+                        'amount'=>'-22.99',
+                        'type'=>1,
+                        'tags'=>(object)array(4),
+                        'note'=>'',
+                        'order'=>5
+                        ),
+                    't6'=>(object) array(
+                        'account'=>4,
+                        'amount'=>'-21.99',
+                        'type'=>1,
+                        'tags'=>(object)array(4),
+                        'note'=>'',
+                        'order'=>6
+                        ),
                 )
             ),
             '20130917'=>(object) array(
@@ -107,7 +136,77 @@ class IndexController extends Zend_Controller_Action
                 'unix'=>mktime(0,0,0,9,14,2013),
                 'balance'=>'321.53',
                 'transactions'=>(object) array()
-            )            
+            ),
+            '20130913'=>(object) array(
+                'unix'=>mktime(0,0,0,9,13,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130912'=>(object) array(
+                'unix'=>mktime(0,0,0,9,12,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130911'=>(object) array(
+                'unix'=>mktime(0,0,0,9,11,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130910'=>(object) array(
+                'unix'=>mktime(0,0,0,9,10,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130909'=>(object) array(
+                'unix'=>mktime(0,0,0,9,9,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130908'=>(object) array(
+                'unix'=>mktime(0,0,0,9,8,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
+            '20130907'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130906'=>(object) array(
+                'unix'=>mktime(0,0,0,9,13,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130905'=>(object) array(
+                'unix'=>mktime(0,0,0,9,12,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130904'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130903'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130902'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130901'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130831'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),
         );
         
         

@@ -1,11 +1,19 @@
 
 <div class="div-table container-fluid well well-small">
+    <div class="row-fluid">
+
+        Balance on date
+        
+    </div>
+</div>
+
+<div class="div-table container-fluid well well-small">
 
     <!-- header -->
     <div class="div-table-header row-fluid">
         <div class="span2">Date</div>
         <div class="span2">Balance</div>
-        <div class="span8">Transactions</div> 
+        <div class="span8">Transactions<a class="btn btn-warning btn-mini pull-right" href="#myModal" role="button" data-toggle="modal">+</a></div> 
     </div>
 
     <?php foreach($this->dates AS $dateKey=>$dateVal) : ?>
@@ -14,97 +22,67 @@
         <div class="div-table-row row-fluid date <?php if ($this->todayKey==$dateKey) echo 'current'; ?>">
 
  
-            <!-- Add Button / Date -->
+            <!-- Date -->
             <div class='date-title span2'>
-                <a class="btn btn-mini btn-success"  href="#">+</a>&nbsp;
                 <?php echo date('jS M Y',$dateVal->unix); ?>
             </div>
 
             
             <!-- Balance -->
-            <div class="date-balance span1 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
+            <div class="date-balance span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
                 &pound; <?php echo $dateVal->balance; ?>
             </div>
 
 
             <!-- Transactions -->   
-            <div class="date-transactions span9">
-                <ul id="<?php echo $dateKey; ?>" class="unstyled inline">
+            <div class="date-transactions span8">
+
+                <ul id="<?php echo $dateKey; ?>" class="unstyled">
+
+                    
                     <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
-                        <li id="<?php echo $transKey; ?>" class="clearfix">
+                    
+                        <li id="<?php echo $transKey; ?>" class="clearfix span4 btn-group date-transaction">
 
                             <?php                             
                             $classes = $transVal->amount>0 ? 'btn btn-small btn-success' : 'btn btn-small btn-danger';
                             $account = isset($this->accounts[$transVal->account]) ? $this->accounts[$transVal->account] : 'unknown'; 
                             $details = '&pound;'.str_replace('-', '', $transVal->amount).' '.($transVal->amount>0 ? 'from' : 'to'). ' '.$account;
+                            
+                            $tags = '';
+                            foreach($transVal->tags AS $tag) {                                    
+                                if (isset($this->transactionTags[$tag])){
+                                    $tags.= $this->transactionTags[$tag];
+                                }
+                            }
+                            
+                            $popup = $details.' '.$this->transactionTypes[$transVal->type].' '.$tags.' '.$transVal->note;
+                            
                             ?>
+
+                                
+                            <a title="" 
+                               data-content="<?php echo $popup; ?>" 
+                               data-placement="left" 
+                               data-toggle="popover" 
+                               class="span10 <?php echo $classes; ?> transaction-details" 
+                               href="#" 
+                               data-original-title="<?php echo $account; ?>">
+                                <span class="visible-desktop"><?php echo $details; ?></span>                                    
+                                <span class="hidden-desktop"><?php echo '&pound;'.str_replace('-', '', $transVal->amount); ?></span> 
+                            </a>
+
                             
-                            <div class="btn-group">
+                            <button class="transaction-options dropdown-toggle <?php echo $classes; ?> span2" data-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
 
-                                <a title="" 
-                                   data-content="Transaction details are type: <?php echo $transVal->type; ?>" 
-                                   data-placement="top" 
-                                   data-toggle="popover" 
-                                   class="<?php echo $classes; ?>" 
-                                   href="#" 
-                                   data-original-title="<?php echo $account; ?>"><?php echo $details; ?></a>
-
-                                    <button class="dropdown-toggle <?php echo $classes; ?>" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="">Edit</a></li>
-                                        <li><a href="">Disable</a></li>                                    
-                                    </ul>
- 
+                            <ul class="dropdown-menu">
+                                <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i> Edit</a></li>
+                                <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i> Disable</a></li>
+                                <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-repeat"></i> Reoccuring</a></li>
+                            </ul>
                             
-                            
-                            </div>
-                                   
-                                   <?php /*
-                            <div class="span2 transaction-amount <?php echo $transVal->amount>0 ? 'positive' : 'negative'; ?>">                                
-                                &pound;<input type="text" placeholder="0.00" value="<?php echo $transVal->amount; ?>" class="span10">
-                            </div> 
-
-                            <div class="span2 transaction-type"> 
-                                <select class="span12">
-                                    <?php foreach ($this->transactionTypes AS $typeKey=>$typeName) {
-                                        $selected = $transVal->type==$typeKey ? 'selected="SELECTED"' : '';
-                                        echo "<option id='$typeKey' $selected>$typeName</option>";
-                                    } ?>
-                                </select>
-                            </div> 
-                            
-                            <div class="span2">
-                                <?php echo $transVal->amount>0 ? 'payment from' : 'payment to'; ?>
-                            </div>
-                            
-                            <div class="span2 transaction-account">                              
-                                <select class="span12">
-                                    <?php foreach ($this->accounts AS $accountKey=>$accountName) {
-                                        $selected = $transVal->account==$accountKey ? 'selected="SELECTED"' : '';
-                                        echo "<option id='$accountKey' $selected>$accountName</option>";
-                                    } ?>
-                                </select>
-                            </div>
-
-
-
-                            <div class="span2 transaction-tags">
-                                <?php foreach($transVal->tags AS $tag) {                                    
-                                    if (isset($this->transactionsTags[$tag])){
-                                        echo "<span class='label'>{$this->transactionsTags[$tag]}</span>&nbsp;";
-                                    }
-                                 }?>
-                            </div>
-
-                            <?php if ($transVal->note!=='') : ?>                                
-                                <div class="span2 transaction-note">  
-                                    <textarea rows="3" class="span12"><?php echo $transVal->note; ?></textarea>                                    
-                                </div> 
-                            <?php endif; ?>
-
-                            */ ?>
                         </li>
                     <?php endforeach; ?>
                 </ul> 
@@ -113,11 +91,31 @@
     <?php endforeach; ?>
 </div>
 
+     
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Add transaction</h3>
+    </div>
+    <div class="modal-body">
+        <p>Select details here</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+
 
 <script type='text/javascript'>
 $(function() {
     
-    $('.btn').popover();
+    $('.transaction-details').popover({
+        trigger: 'hover',
+        delay: { show: 500, hide: 0 }
+      } 
+    );
     
     $(".date-transactions ul").sortable({
         connectWith: ".date-transactions ul",
@@ -130,7 +128,11 @@ $(function() {
                 console.log('order: ')
                 console.log($(this).children());
             }
+                    
     });
+    
+ 
+    
 });
 </script>
 

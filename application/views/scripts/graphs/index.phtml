@@ -1,0 +1,44 @@
+
+<?php
+$types = array($this->transactionTypes, $this->accounts, $this->transactionTags);
+foreach($types AS $type): ?>
+<div class="div-table container-fluid well well-small">
+
+    <div class="row">
+        <div class="span2 div-table-header">&pound;10000</div>
+        <div class="span1">.</div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+    </div>
+    
+    <div class="row">
+        <div class="span2 div-table-header">&pound;9000</div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1">.</div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+        <div class="span1"></div>
+    </div>
+
+    <div class="div-table-header row-fluid">
+        <div class="span2"></div>
+        <?php foreach($type AS $key=>$val): ?>
+            <div class="span2"><?php echo $val; ?></div>
+        <?php endforeach; ?>
+    </div>
+
+</div>
+<?php endforeach; ?>
+
+     
+
+
+

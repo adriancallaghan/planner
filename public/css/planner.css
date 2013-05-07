@@ -16,22 +16,17 @@ div.div-table-header {
     font-weight:bold;
 }
 
-/* general */
-/*div.date {background:#FCF8E3;}*/
-/* Today */
-div.date.current {background:#DFF0D8;}
 
 /*
 Transaction specific 
 */
-div.date-transactions ul {min-height: 20px;}
-div.date-transactions ul li {margin: 0 3px 3px 3px; min-height: 30px;}
-div.date-transactions ul li div.transaction-amount{}
-div.date-transactions ul li div.transaction-account{}
-div.date-transactions ul li div.transaction-type{}
-div.date-transactions ul li div.transaction-tags{}
-div.date-transactions ul li div.transaction-note{font-style:italic; font-size:10px; background:white;}
-
+div.date-transactions ul,div.date-transactions ul li {min-height: 25px;}
+div.date-transactions ul li.date-transaction  {margin:2px 0 0 0; padding:0;} 
+div.date{border-top:1px solid #DDDDDD;}
+div.date:nth-child(odd){background:#F9F9F9;} 
+div.date:nth-child(even){background:#fff;} 
+div.date.current {background:#DFF0D8;}
+div.date-transactions ul li.date-transaction button.transaction-options {margin:0;} /* stop margin-spacing bug */
 
 
 
@@ -39,7 +34,10 @@ div.date-transactions ul li div.transaction-note{font-style:italic; font-size:10
 
 /* JQUERY UI PLACEHOLDER */
 .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important;}
-.ui-sortable-placeholder * { visibility: hidden; }
+.ui-sortable-placeholder * { visibility: hidden;}
 
 
-
+/* USED FOR DEBUGGING ELEMENTS */
+.yellow {
+    background:yellow;
+}
