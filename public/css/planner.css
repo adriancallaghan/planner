@@ -7,27 +7,39 @@
 
 
 */
-body{
-    padding-top: 60px;
-    padding-bottom: 40px;
+html {
+    height: 100%;
 }
 
-div.div-table-header {
-    font-weight:bold;
+body {
+    padding: 60px 0 40px 0;
+    position:relative;
+    height: -moz-calc(100% - 200px); /* Firefox */
+    height: -webkit-calc(100% - 200px); /* WebKit */
+    height: -o-calc(100% - 200px); /* Opera */
+    height: calc(100% - 200px); /* Standard */    
 }
+
+
+div.main-navigation{}
+div.main-message {}
+div.main-content {height:100%; min-height:100%;}
+
 
 
 /*
-Transaction specific 
+Bootstrap allowing scrollbars
 */
-div.date-transactions ul,div.date-transactions ul li {min-height: 25px;}
-div.date-transactions ul li.date-transaction  {margin:2px 0 0 0; padding:0;} 
-div.date{border-top:1px solid #DDDDDD;}
-div.date:nth-child(odd){background:#F9F9F9;} 
-div.date:nth-child(even){background:#fff;} 
-div.date.current {background:#DFF0D8;}
-div.date-transactions ul li.date-transaction button.transaction-options {margin:0;} /* stop margin-spacing bug */
+.span1-scrollable {width:40px;}
+.span2-scrollable {width:120px;}
 
+
+
+/* Height tricks */
+.height-fill {min-height:100%;}
+.height-fill-locked {height:100%;}
+.height-hidden {overflow-y: hidden;}
+.height-scroll {overflow-y: scroll;}
 
 
 
@@ -38,6 +50,8 @@ div.date-transactions ul li.date-transaction button.transaction-options {margin:
 
 
 /* USED FOR DEBUGGING ELEMENTS */
-.yellow {
-    background:yellow;
-}
+.bgd-yellow {background:yellow;}
+.bgd-red {background:#ffaaaa;}
+.bgd-blue {background:#aaaaff;}
+.bgd-green {background:#aaffaa;}
+

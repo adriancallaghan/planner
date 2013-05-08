@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->headLink()->exchangeArray(array());
         //$this->view->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css');        
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap.min.css'));        
-        $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap-responsive.min.css'));        
+        //$this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap-responsive.min.css'));        
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/planner.css'));        
         $this->view->doctype('XHTML1_STRICT');
         $this->view->headMeta()->exchangeArray(array());
@@ -42,7 +42,7 @@ class IndexController extends Zend_Controller_Action
         //$this->_helper->getHelper('Redirector')->gotoSimple('edit',null,null,array('article' =>$article->id));
         
         
-        $this->_helper->flashMessenger(array('alert-success'=>'Transaction moved'));
+        $this->_helper->flashMessenger(array('alert-success'=>'Test Message'));
         
         
         
@@ -204,7 +204,22 @@ class IndexController extends Zend_Controller_Action
             ),            
             '20130831'=>(object) array(
                 'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'351.53',
+                'transactions'=>(object) array()
+            ),
+            '20130830'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
                 'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130829'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'321.53',
+                'transactions'=>(object) array()
+            ),            
+            '20130828'=>(object) array(
+                'unix'=>mktime(0,0,0,9,14,2013),
+                'balance'=>'381.53',
                 'transactions'=>(object) array()
             ),
         );

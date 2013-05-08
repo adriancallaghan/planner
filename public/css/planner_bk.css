@@ -1,0 +1,77 @@
+/*
+
+
+   @app    planner 
+   @author Adrian Callaghan 
+   @date   01092013
+
+
+*/
+html {
+    height: 100%;
+}
+
+body {
+    padding: 60px 0 40px 0;
+    position:relative;
+    
+    /* Firefox */
+    height: -moz-calc(100% - 150px);
+    /* WebKit */
+    height: -webkit-calc(100% - 150px);
+    /* Opera */
+    height: -o-calc(100% - 150px);
+    /* Standard */
+    height: calc(100% - 150px);
+    
+}
+
+div.main{}
+div.main-navigation{}
+div.main-message {}
+div.main-content {}
+
+
+div.div-table-header {}
+div.div-table-row{padding:5px 10px;}
+
+
+
+/*
+Transaction specific 
+*/
+div.date-transactions ul,div.date-transactions ul li {min-height: 25px;}
+div.date-transactions ul li.date-transaction  {margin:2px 0 0 0; padding:0;} 
+div.date{border:1px solid #DDDDDD; border-bottom: none;}
+div.date:nth-child(odd){background:#F9F9F9;} 
+div.date:nth-child(even){background:#fff;} 
+div.date.current {background:#DFF0D8;}
+div.date-transactions ul li.date-transaction button.transaction-options {margin:0;} /* stop margin-spacing bug */
+
+
+
+
+
+/* JQUERY UI PLACEHOLDER */
+.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important;}
+.ui-sortable-placeholder * { visibility: hidden;}
+
+
+.height-fill { 
+    min-height: 100%;
+}
+
+.height-fill-locked { 
+    height: 100%;
+    position:relative;
+}
+
+.height-scroll {
+    overflow-y: scroll;
+}
+/* USED FOR DEBUGGING ELEMENTS */
+.bgd-yellow {background:yellow;}
+.bgd-red {background:#ffaaaa;}
+.bgd-blue {background:#aaaaff;}
+.bgd-green {background:#aaffaa;}
+
