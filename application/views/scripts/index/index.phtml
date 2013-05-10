@@ -2,15 +2,30 @@
 
 <div class="height-fill height-fill-locked row height-hidden">
 
+    
     <!-- Header -->
     <div class="span12">
         <div class="row">
-            <button class="btn span2 bgd-green">1</button>
-            <button class="btn span1 bgd-green">2</button>
-            <button class="btn span1 bgd-green">3</button>
-            <button class="btn span1 bgd-green">4</button>
-            <button class="btn span6 bgd-green">9</button>
-            <button class="btn span1 bgd-green">10</button>
+            
+            <div class="span1">
+                <button class="btn btn-block">Date</button>
+            </div>
+            
+            <div class="span2">
+                <button class="btn btn-block">Balance</button>
+            </div>
+
+            <div class="btn-group span9">
+                <a href="#" class="btn dropdown-toggle btn-block" data-toggle="dropdown">
+                    &pound;321.53 on Saturday 1st of May 2013&nbsp;<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i> Add Transaction</a></li>
+                    <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i> Change Date</a></li>
+                </ul>
+            </div>
+                
+            
         </div>
     </div>
     <!-- Header -->
@@ -19,31 +34,47 @@
 
     <!-- Content -->
     <div class="span12 height-fill-locked height-scroll">
-        <?php for($x=0;$x<500; $x++): ?>
-            <div class="row date">
-                <div class="span2 bgd-blue"><?php echo $x; ?>::1</div>
-                <div class="span1 bgd-blue">2</div>
-                <div class="span1 bgd-blue">3</div>
-                <div class="span1 bgd-blue">4</div>
-                <div class="date-transactions span6 bgd-blue" >
-                        
-                    <ul class="inline">
-                        <li class="bgd-green date-transaction span2 ">1</li>
-                        <li class="bgd-green date-transaction span2 ">2</li>
-                        <li class="bgd-green date-transaction span2 ">3</li>
-                        <li class="bgd-green date-transaction span2 ">4</li>
-                        <li class="bgd-green date-transaction span2 ">5</li>
-                        <li class="bgd-green date-transaction span2 ">6</li>
-
-                    </ul>
-
-
+        <?php foreach($this->dates AS $dateKey=>$dateVal) : ?>
+            
+            <!-- date -->
+            <div class="date <?php if ($this->todayKey==$dateKey) echo 'current'; ?> row">
+                
+                <!-- Date -->
+                <div class='date-title span1'>
+                    <?php echo date('jS M',$dateVal->unix); ?>
                 </div>
-                <div class="span1-scrollable bgd-blue">10</div>
+
+                <!-- Balance -->
+                <div class="date-balance span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
+                    &pound; <?php echo $dateVal->balance; ?>
+                </div>                
+                
+                <div class="date-transactions span9-scrollable" >
+                        
+
+                    <ul id="<?php echo $dateKey; ?>" class="inline">
+
+                        <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
+
+                            <li 
+                                id="<?php echo $transKey; ?>" 
+                                class="date-transaction <?php echo $transVal->amount>0 ? 'positive' : 'negative'; ?> span4"
+                                >
+                                &pound;<?php echo $transVal->amount; ?> <?php echo $transVal->type; ?>
+                            </li>
+                            
+                        <?php endforeach; ?>
+                    </ul> 
+                    
+                    
+                </div>
+
             </div>
-        <?php endfor; ?> 
+        <?php endforeach; ?> 
     </div>
     <!-- Content -->
+    
+    
 </div>
 
 
@@ -71,174 +102,4 @@
 </script>
 
 
-
-
-
-<?php return; ?>
-
-
-
-
-
-
-
-
-<!-- Wrap -->
-<div class="height-fill height-fill-locked well well-small">
-
-    
-    <!-- Header -->
-    <div class="div-table-header navbar container-fluid">
-        <div class="navbar-inner">
-            <ul class="nav row-fluid">
-                <li class="span2"><a href="#">Date</a></li>
-                <li class="divider-vertical"></li>
-                <li class="span2"><a href="#">Balance</a></li>
-                <li class="divider-vertical"></li>
-                <li class="span3"><a href="#">Transactions</a></li>
-                <li class="divider-vertical"></li>
-                <li class="span4">
-                    <div class="btn-group span12">
-                        <a href="#" class="btn dropdown-toggle span12" data-toggle="dropdown">
-                            &pound;321.53 on Saturday 1st of May 2013&nbsp;<span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i> Add Transaction</a></li>
-                            <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i> Change Date</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
-
-
-    <!-- Body (height classes make this scrollable) -->
-    <div class="div-table container-fluid height-fill height-fill-locked height-scroll">
-
-
-        <?php foreach($this->dates AS $dateKey=>$dateVal) : ?>
-
-            <!-- content -->
-            <div class="div-table-row row-fluid date <?php if ($this->todayKey==$dateKey) echo 'current'; ?>">
-
-
-                <!-- Date -->
-                <div class='date-title span2'>
-                    <?php echo date('jS M Y',$dateVal->unix); ?>
-                </div>
-
-
-                <!-- Balance -->
-                <div class="date-balance span2 <?php echo $dateVal->balance==0 ? 'neutral' : $dateVal->balance>0 ? 'positive' : 'negative'; ?>">
-                    &pound; <?php echo $dateVal->balance; ?>
-                </div>
-
-
-                <!-- Transactions -->   
-                <div class="date-transactions span8">
-
-                    <ul id="<?php echo $dateKey; ?>" class="unstyled">
-
-
-                        <?php foreach ($dateVal->transactions AS $transKey=>$transVal) : ?>
-
-                            <li id="<?php echo $transKey; ?>" class="clearfix span4 btn-group date-transaction">
-
-                                <?php                             
-                                $classes = $transVal->amount>0 ? 'btn btn-small btn-success' : 'btn btn-small btn-danger';
-                                $account = isset($this->accounts[$transVal->account]) ? $this->accounts[$transVal->account] : 'unknown'; 
-                                $details = '&pound;'.str_replace('-', '', $transVal->amount).' '.($transVal->amount>0 ? 'from' : 'to'). ' '.$account;
-
-                                $tags = '';
-                                foreach($transVal->tags AS $tag) {                                    
-                                    if (isset($this->transactionTags[$tag])){
-                                        $tags.= $this->transactionTags[$tag];
-                                    }
-                                }
-
-                                $popup = $details.' '.$this->transactionTypes[$transVal->type].' '.$tags.' '.$transVal->note;
-
-                                ?>
-
-
-                                <a title="" 
-                                   data-content="<?php echo $popup; ?>" 
-                                   data-placement="left" 
-                                   data-toggle="popover" 
-                                   class="span10 <?php echo $classes; ?> transaction-details" 
-                                   href="#" 
-                                   data-original-title="<?php echo $account; ?>">
-                                    <span class="visible-desktop"><?php echo $details; ?></span>                                    
-                                    <span class="hidden-desktop"><?php echo '&pound;'.str_replace('-', '', $transVal->amount); ?></span> 
-                                </a>
-
-
-                                <button class="transaction-options dropdown-toggle <?php echo $classes; ?> span2" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-
-                                <ul class="dropdown-menu">
-                                    <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-pencil"></i> Edit</a></li>
-                                    <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i> Disable</a></li>
-                                    <li><a href="#myModal" role="button" data-toggle="modal"><i class="icon-repeat"></i> Reoccuring</a></li>
-                                </ul>
-
-                            </li>
-                        <?php endforeach; ?>
-                    </ul> 
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <!-- Body -->
-    
-    
-</div>
-<!-- Wrap -->
-
-
-<!-- Modal -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Add transaction</h3>
-    </div>
-    <div class="modal-body">
-        <p>Select details here</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Save changes</button>
-    </div>
-</div>
-
-<script type='text/javascript'>
-$(function() {
-    
-    $('.transaction-details').popover({
-        trigger: 'hover',
-        delay: { show: 500, hide: 0 }
-      } 
-    );
-    
-    $(".date-transactions ul").sortable({
-        connectWith: ".date-transactions ul",
-        opacity: 0.6, 
-        cursor: 'move',
-        update : function(e, ui) {
-                var id = ui.item.attr('id');
-                var to = $(this).attr('id');
-                console.log('id: ' + id + ' to: ' + to);
-                console.log('order: ')
-                console.log($(this).children());
-            }
-                    
-    });
-    
- 
-    
-});
-</script>
 

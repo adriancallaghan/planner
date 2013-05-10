@@ -31,20 +31,32 @@ div.main-content {height:100%; min-height:100%;}
 /*
 Specific formatting
 */
-
-
-
+div.date{border:1px solid #DDDDDD; border-bottom: none; padding:5px 0;}
+div.date:nth-child(odd){background:#F9F9F9;} 
+div.date:nth-child(even){background:#fff;} 
+div.date.current {background:#FCF8E3;color:#C09853; border:1px solid #FBEED5;}
 div.date-transactions ul,div.date-transactions ul li {min-height: 20px;}
-div.date-transactions ul li.date-transaction  {margin:1px;padding:5px;} 
-
+.date-transaction {border:1px solid #000; margin:1px; padding:5px; border-radius:4px;} 
+.date-transaction.positive {background:#DFF0D8; border-color:#D6E9C6; color:#468847;}
+.date-transaction.negative {background:#F2DEDE; border-color:#EED3D7; color:#B94A48;}
 
 
 
 /*
-Bootstrap allowing scrollbars
+Bootstrap allowing scrollbars (removes 20px from width)
 */
-.span1-scrollable {width:40px;}
-.span2-scrollable {width:120px;}
+.span1-scrollable {width:40px;} /* was 60px */
+.span2-scrollable {width:120px;} /* was 140px */
+.span3-scrollable {}
+.span4-scrollable {}
+.span5-scrollable {}
+.span6-scrollable {}
+.span7-scrollable {}
+.span8-scrollable {}
+.span9-scrollable {width:680px;} /* was 700px; */
+.span10-scrollable {width:760px;} /* was 780px */
+.span11-scrollable {}
+.span12-scrollable {}
 
 
 

@@ -42,17 +42,11 @@ class IndexController extends Zend_Controller_Action
         //$this->_helper->getHelper('Redirector')->gotoSimple('edit',null,null,array('article' =>$article->id));
         
         
-        $this->_helper->flashMessenger(array('alert-success'=>'Test Message'));
+        //$this->_helper->flashMessenger(array('alert-success'=>'Test Message'));
         
         
-        
-        
-        $this->view->transactionTypes = array(1=>'Bill',2=>'Loan',3=>'Payment',4=>'Deposit');
-        $this->view->accounts = array(1=>'Jennie',2=>'Dad',3=>'02',4=>'HeartInternet',5=>'Orange',6=>'Adrian');
-        $this->view->transactionTags = array(1=>'mobile',2=>'car',3=>'children',4=>'hosting',5=>'takeaway',6=>'domain');
-        
-        
-        
+        $transaction_types = array(0=>'payment',1=>'loan',2=>'mobile');
+
         
         
         $this->view->todayKey = '20130917';
@@ -70,49 +64,37 @@ class IndexController extends Zend_Controller_Action
                     't1'=>(object) array(
                         'account'=>1,
                         'amount'=>'312.42',
-                        'type'=>2,
-                        'tags'=>(object)array(3,2,5),
-                        'note'=>'Day out - jen paid half towards petrol',
+                        'type'=>$transaction_types[2],
                         'order'=>2
                         ),
                      't2'=>(object) array(
                         'account'=>4,
                         'amount'=>'-28.99',
-                        'type'=>1,
-                        'tags'=>(object)array(4),
-                        'note'=>'',
+                        'type'=>$transaction_types[2],
                         'order'=>3
                         ),
                     't3'=>(object) array(
                         'account'=>4,
                         'amount'=>'-8.99',
-                        'type'=>3,
-                        'tags'=>(object)array(4),
-                        'note'=>'Adriancallaghan.co.uk renewal',
+                        'type'=>$transaction_types[0],
                         'order'=>3
                         ),
                     't4'=>(object) array(
                         'account'=>4,
                         'amount'=>'-25.99',
-                        'type'=>1,
-                        'tags'=>(object)array(4),
-                        'note'=>'',
+                        'type'=>$transaction_types[1],
                         'order'=>4
                         ),
                     't5'=>(object) array(
                         'account'=>4,
                         'amount'=>'-22.99',
-                        'type'=>1,
-                        'tags'=>(object)array(4),
-                        'note'=>'',
+                        'type'=>$transaction_types[2],
                         'order'=>5
                         ),
                     't6'=>(object) array(
                         'account'=>4,
                         'amount'=>'-21.99',
-                        'type'=>1,
-                        'tags'=>(object)array(4),
-                        'note'=>'',
+                        'type'=>$transaction_types[1],
                         'order'=>6
                         ),
                 )
