@@ -1,10 +1,10 @@
 
 
-<div class="height-fill height-fill-locked row height-hidden">
+<div class="dates height-fill height-fill-locked row height-hidden">
 
     
     <!-- Header -->
-    <div class="span12">
+    <div class="dates-header span12">
         <div class="row">
             
             <div class="span1">
@@ -33,7 +33,7 @@
 
 
     <!-- Content -->
-    <div class="span12 height-fill-locked height-scroll">
+    <div class="dates-content span12 height-fill-locked height-scroll">
         <?php foreach($this->dates AS $dateKey=>$dateVal) : ?>
             
             <!-- date -->
@@ -59,8 +59,10 @@
                             <li 
                                 id="<?php echo $transKey; ?>" 
                                 class="date-transaction <?php echo $transVal->amount>0 ? 'positive' : 'negative'; ?> span4"
-                                >
-                                &pound;<?php echo $transVal->amount; ?> <?php echo $transVal->type; ?>
+                                >                                
+                                &pound;<input type="text" placeholder="<?php echo $transVal->amount; ?>" class="span1"> 
+                                <input type="text" placeholder="<?php echo $transVal->type; ?>" class="span3"> 
+                                <!--a href="" class="span1 pull-right">x</a>-->
                             </li>
                             
                         <?php endforeach; ?>

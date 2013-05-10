@@ -90,19 +90,21 @@ class IndexController extends Zend_Controller_Action
                         'amount'=>'-22.99',
                         'type'=>$transaction_types[2],
                         'order'=>5
-                        ),
-                    't6'=>(object) array(
-                        'account'=>4,
-                        'amount'=>'-21.99',
-                        'type'=>$transaction_types[1],
-                        'order'=>6
-                        ),
+                        )
+
                 )
             ),
             '20130917'=>(object) array(
                 'unix'=>mktime(0,0,0,9,17,2013),
                 'balance'=>'321.53',
-                'transactions'=>(object) array()
+                'transactions'=>(object) array(
+                    't7'=>(object) array(
+                        'account'=>1,
+                        'amount'=>'312.42',
+                        'type'=>$transaction_types[2],
+                        'order'=>2
+                        )
+                )
             ),
             '20130916'=>(object) array(
                 'unix'=>mktime(0,0,0,9,16,2013),
@@ -112,7 +114,14 @@ class IndexController extends Zend_Controller_Action
             '20130915'=>(object) array(
                 'unix'=>mktime(0,0,0,9,15,2013),
                 'balance'=>'321.53',
-                'transactions'=>(object) array()
+                'transactions'=>(object) array(
+                    't6'=>(object) array(
+                        'account'=>4,
+                        'amount'=>'-21.99',
+                        'type'=>$transaction_types[1],
+                        'order'=>6
+                        ),
+                )
             ),
             '20130914'=>(object) array(
                 'unix'=>mktime(0,0,0,9,14,2013),
