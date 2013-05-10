@@ -12,7 +12,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->headScript()->appendFile('http://code.jquery.com/ui/1.10.2/jquery-ui.js','text/javascript');
         $this->view->headScript()->appendFile($this->view->baseUrl('/js/bootstrap.min.js'),'text/javascript');
         $this->view->headLink()->exchangeArray(array());
-        //$this->view->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css');        
+        $this->view->headLink()->appendStylesheet('http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css');        
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap.min.css'));        
         //$this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/bootstrap-responsive.min.css'));        
         $this->view->headLink()->appendStylesheet($this->view->baseUrl('/css/planner.css'));        

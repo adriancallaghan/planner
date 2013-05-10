@@ -9,12 +9,8 @@
             <button class="btn span1 bgd-green">2</button>
             <button class="btn span1 bgd-green">3</button>
             <button class="btn span1 bgd-green">4</button>
-            <button class="btn span1 bgd-green">5</button>
-            <button class="btn span1 bgd-green">6</button>
-            <button class="btn span1 bgd-green">7</button>
-            <button class="btn span1 bgd-green">8</button>
-            <button class="btn span1 bgd-green">9</button>
-            <button class="btn span2 bgd-green">10</button>
+            <button class="btn span6 bgd-green">9</button>
+            <button class="btn span1 bgd-green">10</button>
         </div>
     </div>
     <!-- Header -->
@@ -24,22 +20,57 @@
     <!-- Content -->
     <div class="span12 height-fill-locked height-scroll">
         <?php for($x=0;$x<500; $x++): ?>
-            <div class="row">
+            <div class="row date">
                 <div class="span2 bgd-blue"><?php echo $x; ?>::1</div>
                 <div class="span1 bgd-blue">2</div>
                 <div class="span1 bgd-blue">3</div>
                 <div class="span1 bgd-blue">4</div>
-                <div class="span1 bgd-blue">5</div>
-                <div class="span1 bgd-blue">6</div>
-                <div class="span1 bgd-blue">7</div>
-                <div class="span1 bgd-blue">8</div>
-                <div class="span1 bgd-blue">9</div>
-                <div class="span2-scrollable bgd-blue">10</div>
+                <div class="date-transactions span6 bgd-blue" >
+                        
+                    <ul class="inline">
+                        <li class="bgd-green date-transaction span2 ">1</li>
+                        <li class="bgd-green date-transaction span2 ">2</li>
+                        <li class="bgd-green date-transaction span2 ">3</li>
+                        <li class="bgd-green date-transaction span2 ">4</li>
+                        <li class="bgd-green date-transaction span2 ">5</li>
+                        <li class="bgd-green date-transaction span2 ">6</li>
+
+                    </ul>
+
+
+                </div>
+                <div class="span1-scrollable bgd-blue">10</div>
             </div>
         <?php endfor; ?> 
     </div>
     <!-- Content -->
 </div>
+
+
+
+
+<script type='text/javascript'>
+    
+    $(function() {
+
+        $(".date-transactions ul").sortable({
+            connectWith: ".date-transactions ul",
+            opacity: 0.6, 
+            cursor: 'move',
+            update : function(e, ui) {
+                var id = ui.item.attr('id');
+                var to = $(this).attr('id');
+                console.log('id: ' + id + ' to: ' + to);
+                console.log('order: ')
+                console.log($(this).children());
+            }
+
+        });
+
+    });
+</script>
+
+
 
 
 
